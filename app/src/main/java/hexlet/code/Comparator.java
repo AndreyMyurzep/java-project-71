@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.enums.Status;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

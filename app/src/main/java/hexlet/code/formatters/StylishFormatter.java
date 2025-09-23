@@ -1,4 +1,7 @@
-package hexlet.code;
+package hexlet.code.formatters;
+
+import hexlet.code.CompareResult;
+import hexlet.code.enums.Status;
 
 import java.util.List;
 import java.util.Map;

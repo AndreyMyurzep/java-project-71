@@ -1,5 +1,8 @@
 package hexlet.code;
 
+import hexlet.code.enums.DiffKeys;
+import hexlet.code.enums.Status;
+
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;

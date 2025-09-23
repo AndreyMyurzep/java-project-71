@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatter;
+
 public class Differ {
     public static String generate(String filePath1, String filePath2, String formate) throws Exception {
         var fileContent1 = Reader.readData(filePath1);
