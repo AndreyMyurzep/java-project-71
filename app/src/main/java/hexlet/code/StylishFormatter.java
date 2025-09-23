@@ -15,16 +15,23 @@ public class StylishFormatter {
             Object value2 = map.get(key).getNewValue();
 
             if (status.equals(Status.ADDED)) {
-                result = result + "  + " + key + ": " + value2.toString() + "\n";
+                result = result + "  + " + key + ": " + formatValue(value2) + "\n";
             } else if (status.equals(Status.REMOVED)) {
-                result = result + "  - " + key + ": " + value1.toString() + "\n";
+                result = result + "  - " + key + ": " + formatValue(value1) + "\n";
             } else if (status.equals(Status.CHANGED)) {
-                result = result + "  - " + key + ": " + value1.toString() + "\n  + " + key
-                        + ": " + value2.toString() + "\n";
+                result = result + "  - " + key + ": " + formatValue(value1) + "\n  + " + key
+                        + ": " + formatValue(value2) + "\n";
             } else {
-                result = result + "    " + key + ": " + value1.toString() + "\n";
+                result = result + "    " + key + ": " + formatValue(value1) + "\n";
             }
         }
         return result + "}";
+    }
+
+    private static String formatValue(Object value) {
+        if (value == null) {
+            return "null";
+        }
+        return value.toString();
     }
 }

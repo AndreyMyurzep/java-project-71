@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifferTest {
     private static String expectedResult;
+    private static String expectedResult2;
 
     public static Path getAbsolutePath(String fileName) {
         Path path = FileSystems.getDefault().getPath("./src/test/resources", fileName);
@@ -28,6 +29,7 @@ class DifferTest {
     @BeforeEach
     public void setUp() throws Exception {
         expectedResult = readFile("test_file1.txt");
+        expectedResult2 = readFile("test_file2.txt");
     }
 
 //    @ParameterizedTest
@@ -37,6 +39,26 @@ class DifferTest {
         String filePath2 = "src/test/resources/file2.json";
         String result = Differ.generate(filePath1, filePath2);
         assertEquals(expectedResult, result);
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void testTwoDifferWorkWithJson() throws Exception {
+        String filePath1 = "src/test/resources/file1-1.json";
+        String filePath2 = "src/test/resources/file2-1.json";
+        String result = Differ.generate(filePath1, filePath2);
+        assertEquals(expectedResult2, result);
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void testTwoDifferWorkWithYml() throws Exception {
+        String filePath1 = "src/test/resources/file1-1.yml";
+        String filePath2 = "src/test/resources/file2-1.yml";
+        String result = Differ.generate(filePath1, filePath2);
+        assertEquals(expectedResult2, result);
         assertNotNull(result);
         assertFalse(result.isEmpty());
     }
