@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-public class JsonFormatter {
+public class StylishFormatter {
     public static String format(List<CompareResult> diff) {
         String result = "{\n";
         Map<String, CompareResult> map = CompareResult.toMap(diff);
