@@ -6,7 +6,7 @@ import java.util.TreeSet;
 
 public class JsonFormatter {
     public static String format(List<CompareResult> diff) {
-        String result = "";
+        String result = "{\n";
         Map<String, CompareResult> map = CompareResult.toMap(diff);
         var keys = new TreeSet<>(CompareResult.getFieldSet(diff));
         for (var key : keys) {
@@ -15,15 +15,16 @@ public class JsonFormatter {
             Object value2 = map.get(key).getNewValue();
 
             if (status.equals(Status.ADDED)) {
-                result = result + "+ " + key + ": " + value2.toString() + "\n";
+                result = result + "  + " + key + ": " + value2.toString() + "\n";
             } else if (status.equals(Status.REMOVED)) {
-                result = result + "- " + key + ": " + value1.toString() + "\n";
+                result = result + "  - " + key + ": " + value1.toString() + "\n";
             } else if (status.equals(Status.CHANGED)) {
-                result = result + "+ " + key + ": " + value1.toString() + "\n+ " + key + ": " + value2.toString() + "\n";
+                result = result + "  - " + key + ": " + value1.toString() + "\n  + " + key
+                        + ": " + value2.toString() + "\n";
             } else {
-                result = result + "  " + key + ": " + value1.toString() + "\n";
+                result = result + "    " + key + ": " + value1.toString() + "\n";
             }
         }
-        return result;
+        return result + "}";
     }
 }

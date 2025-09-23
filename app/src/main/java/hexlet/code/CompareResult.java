@@ -1,10 +1,14 @@
 package hexlet.code;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class CompareResult {
+public final class CompareResult {
     private final Map<DiffKeys, Object> data;
 
     public CompareResult(String field, Status status, Object oldValue, Object newValue) {

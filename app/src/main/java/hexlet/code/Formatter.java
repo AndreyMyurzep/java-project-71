@@ -6,6 +6,7 @@
 //    public static String format(List<CompareResult> diff, String format) throws Exception {
 //        return switch (formatter) {
 //            case "json" -> JsonFormatter.format(diff);
+//            case "stylish" -> StylishFormatter(diff);
 //            default -> throw new RuntimeException("Unknown format" + formatter);
 //        };
 //    }
