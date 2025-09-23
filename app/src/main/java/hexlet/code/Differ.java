@@ -1,7 +1,5 @@
 package hexlet.code;
 
-import java.util.*;
-
 public class Differ {
     public static String generate(String file1, String file2) throws Exception {
         var fileContent1 = Reader.readDataJson(file1);
@@ -12,7 +10,6 @@ public class Differ {
 
         var diff = Comparator.compare(file1Parsed, file2Parsed);
 
-        return diff.toString();
-
+        return JsonFormatter.format(diff);
     }
 }

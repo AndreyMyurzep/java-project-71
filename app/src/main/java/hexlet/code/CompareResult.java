@@ -1,8 +1,7 @@
 package hexlet.code;
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class CompareResult {
@@ -18,6 +17,12 @@ public class CompareResult {
 
     public String getField() {
         return (String) data.get(DiffKeys.FIELD);
+    }
+
+    public static Set<String> getFieldSet(List<CompareResult> results) {
+        return results.stream()
+                .map(CompareResult::getField)
+                .collect(Collectors.toSet());
     }
 
     public Status getStatus() {
@@ -36,10 +41,18 @@ public class CompareResult {
         return new EnumMap<>(data);
     }
 
+    public static Map<String, CompareResult> toMap(List<CompareResult> results) {
+        return results.stream()
+                .collect(Collectors.toMap(
+                        CompareResult::getField,
+                        result -> result,
+                        (existing, replacement) -> existing // обработка дубликатов
+                ));
+    }
+
     @Override
     public String toString() {
         return String.format("Difference{field='%s', status=%s, oldValue=%s, newValue=%s}",
                 getField(), getStatus(), getOldValue(), getNewValue());
     }
-
 }
