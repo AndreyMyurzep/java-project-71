@@ -9,6 +9,7 @@ public class Formatter {
         return switch (format) {
             case "plain" -> PlainFormatter.format(diff);
             case "stylish" -> StylishFormatter.format(diff);
+            case "json" -> JsonFormatter.format(diff);
             default -> throw new RuntimeException("Unknown format" + format);
         };
     }

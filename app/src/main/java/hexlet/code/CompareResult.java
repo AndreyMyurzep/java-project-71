@@ -44,10 +44,6 @@ public final class CompareResult {
         return data.get(DiffKeys.NEW_VALUE);
     }
 
-    public Map<DiffKeys, Object> getRawData() {
-        return new EnumMap<>(data);
-    }
-
     public static Map<String, CompareResult> toMap(List<CompareResult> results) {
         return results.stream()
                 .collect(Collectors.toMap(

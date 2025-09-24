@@ -1,24 +1,24 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class DifferTest {
-    private static String expectedResult;
-    private static String expectedResult2;
-    private static String expectedResult3;
+    private String expectedResultJson;
+    private String expectedResultPlain;
+    private String expectedResultStylish;
 
     public static Path getAbsolutePath(String fileName) {
-        Path path = FileSystems.getDefault().getPath("./src/test/resources", fileName);
+        Path path = FileSystems.getDefault().getPath("./src/test/resources/", fileName);
         return path;
     }
 
@@ -29,68 +29,51 @@ class DifferTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        expectedResult = readFile("test_file1.txt");
-        expectedResult2 = readFile("test_file2.txt");
-        expectedResult3 = readFile("test_file.plain");
+        expectedResultJson = readFile("expected_result/result.json");
+        expectedResultStylish = readFile("expected_result/result.stylish");
+        expectedResultPlain = readFile("expected_result/result.plain");
     }
 
-//    @ParameterizedTest
-    @Test
-    public void testDifferWorkWithJson() throws Exception {
-        String filePath1 = "src/test/resources/file1.json";
-        String filePath2 = "src/test/resources/file2.json";
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yml"})
+    public void testDifferWorkDefault(String fileType) throws Exception {
+        var filePath1 = getAbsolutePath("input_files/file1" + fileType).toString();
+        var filePath2 = getAbsolutePath("input_files/file2" + fileType).toString();
         String result = Differ.generate(filePath1, filePath2);
-        assertEquals(expectedResult, result);
+        assertEquals(expectedResultStylish, result);
         assertNotNull(result);
         assertFalse(result.isEmpty());
     }
 
-    @Test
-    public void testTwoDifferWorkWithJson() throws Exception {
-        String filePath1 = "src/test/resources/file1-1.json";
-        String filePath2 = "src/test/resources/file2-1.json";
-        String result = Differ.generate(filePath1, filePath2);
-        assertEquals(expectedResult2, result);
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yml"})
+    public void testDifferWorkStylish(String fileType) throws Exception {
+        var filePath1 = getAbsolutePath("input_files/file1" + fileType).toString();
+        var filePath2 = getAbsolutePath("input_files/file2" + fileType).toString();
+        String result = Differ.generate(filePath1, filePath2, "stylish");
+        assertEquals(expectedResultStylish, result);
         assertNotNull(result);
         assertFalse(result.isEmpty());
     }
 
-    @Test
-    public void testTwoDifferWorkWithYml() throws Exception {
-        String filePath1 = "src/test/resources/file1-1.yml";
-        String filePath2 = "src/test/resources/file2-1.yml";
-        String result = Differ.generate(filePath1, filePath2);
-        assertEquals(expectedResult2, result);
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-    }
-
-    @Test
-    public void testDifferWorkWithYaml() throws Exception {
-        String filePath1 = "src/test/resources/file1.yaml";
-        String filePath2 = "src/test/resources/file2.yaml";
-        String result = Differ.generate(filePath1, filePath2);
-        assertEquals(expectedResult, result);
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-    }
-
-    @Test
-    public void testDifferJsonToPlain() throws Exception {
-        String filePath1 = "src/test/resources/file1-1.json";
-        String filePath2 = "src/test/resources/file2-1.json";
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yml"})
+    public void testDifferWorkYml(String fileType) throws Exception {
+        var filePath1 = getAbsolutePath("input_files/file1" + fileType).toString();
+        var filePath2 = getAbsolutePath("input_files/file2" + fileType).toString();
         String result = Differ.generate(filePath1, filePath2, "plain");
-        assertEquals(expectedResult3, result);
+        assertEquals(expectedResultPlain, result);
         assertNotNull(result);
         assertFalse(result.isEmpty());
     }
 
-    @Test
-    public void testDifferYmlToPlain() throws Exception {
-        String filePath1 = "src/test/resources/file1-1.yml";
-        String filePath2 = "src/test/resources/file2-1.yml";
-        String result = Differ.generate(filePath1, filePath2, "plain");
-        assertEquals(expectedResult3, result);
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yml"})
+    public void testDifferWorkJson(String fileType) throws Exception {
+        var filePath1 = getAbsolutePath("input_files/file1" + fileType).toString();
+        var filePath2 = getAbsolutePath("input_files/file2" + fileType).toString();
+        String result = Differ.generate(filePath1, filePath2, "json");
+        assertEquals(expectedResultJson, result);
         assertNotNull(result);
         assertFalse(result.isEmpty());
     }

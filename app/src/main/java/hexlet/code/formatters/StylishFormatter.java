@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 public class StylishFormatter {
     public static String format(List<CompareResult> diff) {
-        String result = "{\n";
+        StringBuilder result = new StringBuilder("{\n");
         Map<String, CompareResult> map = CompareResult.toMap(diff);
         var keys = new TreeSet<>(CompareResult.getFieldSet(diff));
         for (var key : keys) {
@@ -18,14 +18,14 @@ public class StylishFormatter {
             Object value2 = map.get(key).getNewValue();
 
             if (status.equals(Status.ADDED)) {
-                result = result + "  + " + key + ": " + formatValue(value2) + "\n";
+                result.append("  + ").append(key).append(": ").append(formatValue(value2)).append("\n");
             } else if (status.equals(Status.REMOVED)) {
-                result = result + "  - " + key + ": " + formatValue(value1) + "\n";
+                result.append("  - ").append(key).append(": ").append(formatValue(value1)).append("\n");
             } else if (status.equals(Status.CHANGED)) {
-                result = result + "  - " + key + ": " + formatValue(value1) + "\n  + " + key
-                        + ": " + formatValue(value2) + "\n";
+                result.append("  - ").append(key).append(": ").append(formatValue(value1)).append("\n  + ")
+                        .append(key).append(": ").append(formatValue(value2)).append("\n");
             } else {
-                result = result + "    " + key + ": " + formatValue(value1) + "\n";
+                result.append("    ").append(key).append(": ").append(formatValue(value1)).append("\n");
             }
         }
         return result + "}";

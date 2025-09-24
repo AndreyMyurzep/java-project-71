@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 public class PlainFormatter {
     public static String format(List<CompareResult> diff) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         Map<String, CompareResult> map = CompareResult.toMap(diff);
         var keys = new TreeSet<>(CompareResult.getFieldSet(diff));
         for (var key : keys) {
@@ -19,13 +19,15 @@ public class PlainFormatter {
             Object value2 = map.get(key).getNewValue();
 
             if (status.equals(Status.ADDED)) {
-                result = result + "Property \'" + key + "\' was added with value: " + formatValue(value2) + "\n";
+                result.append("Property '").append(key).append("' was added with value: ")
+                        .append(formatValue(value2)).append("\n");
             } else if (status.equals(Status.REMOVED)) {
-                result = result + "Property \'" + key + "\' was removed\n";
+                result.append("Property '").append(key).append("' was removed\n");
             } else if (status.equals(Status.CHANGED)) {
-                result = result + "Property \'" + key + "\' was updated. From " + formatValue(value1) +
-                        " to " + formatValue(value2) + "\n";
-            } else { }
+                result.append("Property '").append(key).append("' was updated. From ")
+                        .append(formatValue(value1)).append(" to ").append(formatValue(value2))
+                        .append("\n");
+            }
         }
         return result.substring(0, result.length() - 1);
     }
@@ -41,7 +43,7 @@ public class PlainFormatter {
             return "[complex value]";
         }
         if (value instanceof String) {
-            return "\'" + value + "\'";
+            return "'" + value + "'";
         }
         if (value instanceof Boolean) {
             return value.toString().toLowerCase();

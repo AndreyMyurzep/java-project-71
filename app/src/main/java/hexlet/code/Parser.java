@@ -24,7 +24,7 @@ public class Parser {
         return JSON_MAPPER.readValue(content, new TypeReference<>() { });
     }
 
-    private static Map<String, Object> parseYaml(String content) throws IOException {
+    private static Map<String, Object> parseYaml(String content) {
         return YAML_MAPPER.load(content);
     }
 }
