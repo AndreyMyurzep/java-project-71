@@ -9,6 +9,10 @@ import java.util.Map;
 
 
 public class Parser {
+
+    private Parser() {
+    }
+
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final Yaml YAML_MAPPER = new Yaml();
 

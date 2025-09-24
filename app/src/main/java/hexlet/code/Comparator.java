@@ -9,6 +9,10 @@ import java.util.Objects;
 import java.util.TreeSet;
 
 public class Comparator {
+
+    private Comparator() {
+    }
+
     public static List<CompareResult> compare(Map<String, Object> file1, Map<String, Object> file2) {
         var result = new ArrayList<CompareResult>();
 

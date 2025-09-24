@@ -3,6 +3,10 @@ package hexlet.code;
 import hexlet.code.formatters.Formatter;
 
 public class Differ {
+
+    private Differ() {
+    }
+
     public static String generate(String filePath1, String filePath2, String formate) throws Exception {
         var fileContent1 = Reader.readData(filePath1);
         var fileContent2 = Reader.readData(filePath2);

@@ -8,6 +8,10 @@ import hexlet.code.CompareResult;
 import java.util.List;
 
 public class JsonFormatter {
+
+    private JsonFormatter() {
+    }
+
     public static String format(List<CompareResult> diff) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);

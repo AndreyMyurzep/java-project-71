@@ -8,6 +8,10 @@ import java.util.Map;
 import java.util.TreeSet;
 
 public class StylishFormatter {
+
+    private StylishFormatter() {
+    }
+
     public static String format(List<CompareResult> diff) {
         StringBuilder result = new StringBuilder("{\n");
         Map<String, CompareResult> map = CompareResult.toMap(diff);

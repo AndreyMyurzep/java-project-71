@@ -18,8 +18,7 @@ class DifferTest {
     private String expectedResultStylish;
 
     public static Path getAbsolutePath(String fileName) {
-        Path path = FileSystems.getDefault().getPath("./src/test/resources/", fileName);
-        return path;
+        return FileSystems.getDefault().getPath("./src/test/resources/", fileName);
     }
 
     public static String readFile(String fileName) throws IOException {

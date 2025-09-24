@@ -9,6 +9,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class PlainFormatter {
+
+    private PlainFormatter() {
+    }
+
+    private static final String START_WORD = "Property '";
+
     public static String format(List<CompareResult> diff) {
         StringBuilder result = new StringBuilder();
         Map<String, CompareResult> map = CompareResult.toMap(diff);
@@ -19,12 +25,12 @@ public class PlainFormatter {
             Object value2 = map.get(key).getNewValue();
 
             if (status.equals(Status.ADDED)) {
-                result.append("Property '").append(key).append("' was added with value: ")
+                result.append(START_WORD).append(key).append("' was added with value: ")
                         .append(formatValue(value2)).append("\n");
             } else if (status.equals(Status.REMOVED)) {
-                result.append("Property '").append(key).append("' was removed\n");
+                result.append(START_WORD).append(key).append("' was removed\n");
             } else if (status.equals(Status.CHANGED)) {
-                result.append("Property '").append(key).append("' was updated. From ")
+                result.append(START_WORD).append(key).append("' was updated. From ")
                         .append(formatValue(value1)).append(" to ").append(formatValue(value2))
                         .append("\n");
             }
