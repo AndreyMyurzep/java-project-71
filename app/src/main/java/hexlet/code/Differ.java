@@ -2,12 +2,14 @@ package hexlet.code;
 
 import hexlet.code.formatters.Formatter;
 
+import java.io.IOException;
+
 public class Differ {
 
     private Differ() {
     }
 
-    public static String generate(String filePath1, String filePath2, String formate) throws Exception {
+    public static String generate(String filePath1, String filePath2, String formate) throws IOException {
         var fileContent1 = Reader.readData(filePath1);
         var fileContent2 = Reader.readData(filePath2);
         var fileFormate1 = Reader.readFormate(filePath1);
